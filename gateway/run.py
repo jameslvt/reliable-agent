@@ -53,6 +53,7 @@ from typing import Dict, Optional, Any, List, Union
 from agent.account_usage import fetch_account_usage, render_account_usage_lines
 from agent.async_utils import safe_schedule_threadsafe
 from agent.i18n import t
+from branding import MODEL_PUBLIC_NAME
 from hermes_cli.config import cfg_get
 from hermes_cli.fallback_config import get_fallback_chain
 
@@ -12598,7 +12599,7 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
             headers["X-Hermes-Session-Id"] = session_id
 
         body = {
-            "model": "hermes-agent",
+            "model": MODEL_PUBLIC_NAME,
             "messages": api_messages,
             "stream": True,
         }

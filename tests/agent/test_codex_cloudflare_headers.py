@@ -64,10 +64,12 @@ class TestCodexCloudflareHeaders:
         headers = _codex_cloudflare_headers(_make_codex_jwt())
         assert headers["originator"] == "codex_cli_rs"
 
-    def test_user_agent_advertises_codex_cli_rs(self):
+    def test_user_agent_advertises_codex_cli_rs_with_reliable_branding(self):
         from agent.auxiliary_client import _codex_cloudflare_headers
         headers = _codex_cloudflare_headers(_make_codex_jwt())
         assert headers["User-Agent"].startswith("codex_cli_rs/")
+        assert headers["User-Agent"].endswith("(reliable-agent)")
+        assert "Hermes" not in headers["User-Agent"]
 
     def test_account_id_extracted_from_jwt(self):
         from agent.auxiliary_client import _codex_cloudflare_headers
